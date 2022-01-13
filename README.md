@@ -24,7 +24,7 @@ The dot product of two vectors (arrays) is calculated as:
 
 <code>
 u . v => (u<sub><i>1</i></sub> * v<sub><i>1</i></sub>) + (u<sub><i>2</i></sub> * v<sub><i>2</i></sub>) + &hellip; + (u<sub><i>n</i></sub> * v<sub><i>n</i></sub>)
-</code><br>
+</code><br><br>
 
 Performance is calculated as a ratio with WASM being the 1.
 
