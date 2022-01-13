@@ -24,7 +24,7 @@ The dot product of two vectors (arrays) is calculated as:
 
 <code>
 u . v => (u<sub><i>1</i></sub> * v<sub><i>1</i></sub>) + (u<sub><i>2</i></sub> * v<sub><i>2</i></sub>) + &hellip; + (u<sub><i>n</i></sub> * v<sub><i>n</i></sub>)
-</code>
+</code><br>
 
 Performance is calculated as a ratio with WASM being the 1.
 
@@ -32,12 +32,11 @@ Due to the fact that after multiplying two i32s, JavaScript cannot then store th
 
 ```sh
 $ node vector.js
+Dot product of 2, 16384 dimensional i32 vectors
+ JavaScript: Result = 1098614033350 calculated in 2.470ms
+WebAssembly: Result = 1098614033350 calculated in 0.035ms
 
-Dot product of 2, 16383 dimensional i32 vectors
- JavaScript: Result = 1092415817369 calculated in 2.562ms
-WebAssembly: Result = 1092415817369 calculated in 0.079ms
-
-JavaScript : WASM performance ratio = 32.565:1
+JavaScript : WASM performance ratio = 71.427:1
 ```
 
 The performance ratio can vary quite significantly from that shown above.
