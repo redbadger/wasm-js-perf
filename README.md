@@ -12,7 +12,7 @@ A collection of programs that compare the performance of JS and WASM when perfor
    * Uncomment the appropriate `import` and `call` lines in `vector.wat`
    * Recompile `vector.wat` using `wat2wasm`
    * In `vector.js`, set the value of constant `VEC_I32_SIZE` to a suitably small value (E.G. 4), to avoid flooding the console with log messages
-   * Run `node vector.js`
+* Run `node vector.js`
 
 ### Vector Dot Product
 
