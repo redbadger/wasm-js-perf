@@ -8,6 +8,11 @@ A collection of programs that compare the performance of JS and WASM when perfor
 
 * Ensure that you are using Node 14 or higher
 * Clone the repo into some suitable directory
+* If you wish to see debug messages from the WASM function:
+   * Uncomment the appropriate `import` and `call` lines in `vector.wat`
+   * Recompile `vector.wat` using `wat2wasm`
+   * In `vector.js`, set the value of constant `VEC_I32_SIZE` to a suitably small value (E.G. 4), to avoid flooding the console with log messages
+   * Run `node vector.js`
 
 ### Vector Dot Product
 
