@@ -54,21 +54,24 @@ for (let i = 0; i < VEC_I32_SIZE * 2; i++) {
   wasmMem32[i] = parseInt(Math.random() * 16383)
 }
 
-let wasmVec1 = wasmMem32.slice(0, VEC_I32_SIZE)
-let wasmVec2 = wasmMem32.slice(VEC_I32_SIZE, VEC_I32_SIZE * 2)
-
+// For an accurate performance comparison, JavaScript must work with a native BigInt array rather than converting each
+// i32 element in WASM shared memory to a BigInt.  Without these duplicate arrays, JS will run about 3 times slower
 let jsVec1 = new BigUint64Array(VEC_I32_SIZE)
 let jsVec2 = new BigUint64Array(VEC_I32_SIZE)
 
-// For an accurate performance comparison, JavaScript must work with a native BigInt array rather than converting each
-// i32 element in WASM shared memory to a BigInt.  Without these duplicate arrays, JS will run about 3 times slower
+let wasmVec1 = wasmMem32.slice(0, VEC_I32_SIZE)
+let wasmVec2 = wasmMem32.slice(VEC_I32_SIZE, VEC_I32_SIZE * 2)
+
 for (let i=0; i<VEC_I32_SIZE; i++) {
   jsVec1[i] = BigInt(wasmVec1[i])
   jsVec2[i] = BigInt(wasmVec2[i])
 }
 
-// 'result' is the i64 result calculated by WebAssembly and is stored immediately after the two i32 arrays of size
-// VEC_BYTES.  So the position of 'result' in the wasmMem64 array is Math.ceil((VEC_BYTES * 2) / 8)
+// 'result' is the i64 value calculated by WebAssembly.
+// At the moment, there no way to pass i64 (BigInt) values between JS and WASM, so any time such values need to be
+// transferred, you must use shared memory rather than the function signature.
+// The 'result' is stored in shared memory immediately after the two i32 arrays of size VEC_BYTES.
+// So the position of 'result' in the wasmMem64 array is Math.ceil((VEC_BYTES * 2) / 8)
 let result_offset = Math.ceil(VEC_BYTES / 4)
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
